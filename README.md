@@ -1,6 +1,6 @@
 20IT928-PRIEE-C10
 
-Project Name: Retail Store Stock Inventory Analysis<br>
+Project Title: Retail Store Stock Inventory Analysis<br>
 <br>
 Project Domain: Data Science<br>
 <br>
