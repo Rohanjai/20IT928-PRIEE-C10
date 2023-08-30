@@ -1,9 +1,9 @@
 20IT928-PRIEE-C10
 
 Project Name: Retail Store Stock Inventory Analysis<br>
-
+<br>
 Project Domain: Data Science<br>
-
+<br>
 Project Description: This project mainly deals with determining the right amount of stock to fulfill the demands of the customer. It also determines the profit on buying that stock. It also evaluates business performance.<br>
 
 Team Members:-
