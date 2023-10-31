@@ -10,12 +10,13 @@ import streamlit as st
 # Load dataset
 
 st.title("*RETAIL STOCK STORE INVENTORY ANALYSIS*")
-
-uploaded_file = st.file_uploader("*Upload the dataset for analysis*")
+st.header('Upload Dataset')
+uploaded_file = st.file_uploader("Choose a file", type="csv")
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
     st.subheader('Heres the uploaded *dataset*')
     st.table(data.head(20))
+    # st.write(data)
     # Convert date to datetime format and show dataset information
     data['Date'] =  pd.to_datetime(data['Date'])
     data.info()
