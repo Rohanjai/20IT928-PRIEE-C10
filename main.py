@@ -1,6 +1,7 @@
 import streamlit as st
 from app import *
 from home import *
+from outlier import *
 # Create a Streamlit app
 # st.title("*RETAIL STOCK STORE INVENTORY ANALYSIS*")
 st.title("RETAIL STOCK STORE INVENTORY ANALYSIS")
@@ -29,6 +30,7 @@ if selected_page == "Upload and Analyze":
 # Page for the "View Outliers" link
 if selected_page == "View Outliers":
     st.title("View Outliers")
+    outlier_page()
     # Add code for the "View Outliers" page
 
 # Additional content in your app
