@@ -236,26 +236,13 @@ def Analyze_Page():
 
 
         # find outliers could be another sidebar
-        # fig, axs = plt.subplots(4,figsize=(5,12))
-        # X = data[['Temperature','Fuel_Price','CPI','Unemployment']]
-        # for i,column in enumerate(X):
-        #     sns.boxplot(data[column], ax=axs[i])
-        # st.pyplot(fig)
+        
 
 
 
         # drop the outliers     
         data_new = data[(data['Unemployment']<10) & (data['Unemployment']>4.5) & (data['Temperature']>10)]
         # data_new
-
-
-
-        # check outliers for testing maybe in sidebar
-        # fig, axs = plt.subplots(4,figsize=(5,12))
-        # X = data_new[['Temperature','Fuel_Price','CPI','Unemployment']]
-        # for i,column in enumerate(X):
-        #     sns.boxplot(data_new[column], ax=axs[i])
-        # st.pyplot(fig)
 
 
 
