@@ -25,9 +25,10 @@ if uploaded_file is not None:
     data['Month']= pd.DatetimeIndex(data['Date']).month
     data['Day'] = pd.DatetimeIndex(data['Date']).day
     data['Year'] = pd.DatetimeIndex(data['Date']).year
-    
-    
-    
+
+    st.sidebar.title('*App Navigation*')
+
+    section = st.sidebar.radio('Go to:', ('Section 1', 'Section 2', 'Section 3'))
     plt.figure(figsize=(50,50))
     st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -133,11 +134,16 @@ if uploaded_file is not None:
     Labour_Day =  ['10-9-2010', '9-9-2011', '7-9-2012']
     Thanksgiving =  ['26-11-2010', '25-11-2011', '23-11-2012']
     Christmas = ['31-12-2010', '30-12-2011', '28-12-2012']
-        
-    plot_line(total_sales,Super_Bowl,'Super Bowl')
-    plot_line(total_sales,Labour_Day,'Labour Day')
-    plot_line(total_sales,Thanksgiving,'Thanksgiving')
-    plot_line(total_sales,Christmas,'Christmas')
+    st.header('*Sales in holidays*')
+    tab1 ,tab2 , tab3,tab4 = st.tabs(['Super Bowl','Thanksgiving','Labour Day','Christmas'])
+    with tab1:
+        st.line_chart(total_sales,Super_Bowl,'Super Bowl')
+    with tab2:
+        plot_line(total_sales,Labour_Day,'Labour Day')
+    with tab3:
+        plot_line(total_sales,Thanksgiving,'Thanksgiving')
+    with tab4:
+        plot_line(total_sales,Christmas,'Christmas')
     
     
     
@@ -151,46 +157,55 @@ if uploaded_file is not None:
     Thanksgiving_df = pd.DataFrame(data.loc[data.Date.isin(Thanksgiving)].groupby('Year')['Weekly_Sales'].sum())
     Labour_Day_df = pd.DataFrame(data.loc[data.Date.isin(Labour_Day)].groupby('Year')['Weekly_Sales'].sum())
     Christmas_df = pd.DataFrame(data.loc[data.Date.isin(Christmas)].groupby('Year')['Weekly_Sales'].sum())
-    st.subheader('Super Bowl',divider='blue')
-    st.text('Yearly Sales in Super Bowl holiday')
-    Super_Bowl_df.plot(kind='bar',legend=False,title='Yearly Sales in Super Bowl holiday') 
-    st.pyplot()
-    st.subheader('Thanksgiving',divider='blue')
-    st.text('Yearly Sales in Thanksgiving holiday')
-    Thanksgiving_df.plot(kind='bar',legend=False,title='Yearly Sales in Thanksgiving holiday') 
-    st.pyplot()
-    st.subheader('Labour Day',divider='blue')
-    Labour_Day_df.plot(kind='bar',legend=False,title='Yearly Sales in Labour_Day holiday')
-    st.pyplot()
-    st.subheader('Christmas',divider='blue')
-    Christmas_df.plot(kind='bar',legend=False,title='Yearly Sales in Christmas holiday')
-    st.pyplot()
+    tab1 ,tab2 , tab3,tab4 = st.tabs(['Super Bowl','Thanksgiving','Labour Day','Christmas'])
+    with tab1:
+        st.subheader('Super Bowl',divider='blue')
+        st.text('Yearly Sales in Super Bowl holiday')
+        # Super_Bowl_df.plot(kind='bar',legend=False,title='Yearly Sales in Super Bowl holiday') 
+        st.bar_chart(Super_Bowl_df)
+    with tab2:
+        st.subheader('Thanksgiving',divider='blue')
+        st.text('Yearly Sales in Thanksgiving holiday')
+        # Thanksgiving_df.plot(kind='bar',legend=False,title='Yearly Sales in Thanksgiving holiday') 
+        st.bar_chart(Thanksgiving_df)
+    with tab3:
+        st.subheader('Labour Day',divider='blue')
+        # Labour_Day_df.plot(kind='bar',legend=False,title='Yearly Sales in Labour_Day holiday')
+        st.text('Yearly Sales in Labour Day holiday')
+        st.bar_chart(Labour_Day_df)
+    with tab4:
+        st.subheader('Christmas',divider='blue')
+        # Christmas_df.plot(kind='bar',legend=False,title='Yearly Sales in Christmas holiday')
+        st.text('Yearly Sales in Christmas holiday')
+        st.bar_chart(Christmas_df)
 
 
 
+    st.header('*Monthly view of sales for each years*')
     
     # Monthly view of sales for each years
-    st.header('*Monthly view of sales for each years*')
-    st.subheader('2010')
-    plt.scatter(data[data.Year==2010]["Month"],data[data.Year==2010]["Weekly_Sales"])
-    plt.xlabel("months")
-    plt.ylabel("Weekly Sales")
-    plt.title("Monthly view of sales in 2010")
-    st.pyplot()
-
-    st.subheader('2011')
-    plt.scatter(data[data.Year==2011]["Month"],data[data.Year==2011]["Weekly_Sales"])
-    plt.xlabel("months")
-    plt.ylabel("Weekly Sales")
-    plt.title("Monthly view of sales in 2011")
-    st.pyplot()
-
-    st.subheader('2012')
-    plt.scatter(data[data.Year==2012]["Month"],data[data.Year==2012]["Weekly_Sales"])
-    plt.xlabel("Months")
-    plt.ylabel("Weekly Sales")
-    plt.title("Monthly view of sales in 2012")
-    st.pyplot()
+    tab1 ,tab2 , tab3 = st.tabs(['2010','2011','2012'])
+    with tab1:
+        st.subheader('2010')
+        plt.scatter(data[data.Year==2010]["Month"],data[data.Year==2010]["Weekly_Sales"])
+        plt.xlabel("months")
+        plt.ylabel("Weekly Sales")
+        plt.title("Monthly view of sales in 2010")
+        st.pyplot()
+    with tab2:
+        st.subheader('2011')
+        plt.scatter(data[data.Year==2011]["Month"],data[data.Year==2011]["Weekly_Sales"])
+        plt.xlabel("months")
+        plt.ylabel("Weekly Sales")
+        plt.title("Monthly view of sales in 2011")
+        st.pyplot()
+    with tab3:
+        st.subheader('2012')
+        plt.scatter(data[data.Year==2012]["Month"],data[data.Year==2012]["Weekly_Sales"])
+        plt.xlabel("Months")
+        plt.ylabel("Weekly Sales")
+        plt.title("Monthly view of sales in 2012")
+        st.pyplot()
 
 
 
@@ -198,22 +213,23 @@ if uploaded_file is not None:
     # Monthly view of sales for all years
     st.header('*Monthly view of sales for all years*')
     plt.figure(figsize=(10,6))
-    plt.bar(data["Month"],data["Weekly_Sales"])
-    plt.xlabel("months")
-    plt.ylabel("Weekly Sales")
-    plt.title("Monthly view of sales")
-    st.pyplot()
+    # st.bar_chart(data["Month"],data["Weekly_Sales"],x="Month",y="Weekly_Sales")
+    # plt.xlabel("months")
+    # plt.ylabel("Weekly Sales")
+    # plt.title("Monthly view of sales")
+    monthly_data = data.groupby("Month")[["Weekly_Sales"]].sum()
+    st.bar_chart(monthly_data)  
 
 
 
     # Yearly view of sales
     st.header('*Yearly view of sales*')
     plt.figure(figsize=(10,6))
-    data.groupby("Year")[["Weekly_Sales"]].sum().plot(kind='bar',legend=False)
-    plt.xlabel("Years")
-    plt.ylabel("Weekly Sales")
-    plt.title("Yearly view of sales")
-    st.pyplot()
+    newd = data.groupby("Year")[["Weekly_Sales"]].sum()
+    # plt.xlabel("Years")
+    # plt.ylabel("Weekly Sales")
+    # plt.title("Yearly view of sales")
+    st.bar_chart(newd)
 
 
 
@@ -254,113 +270,118 @@ if uploaded_file is not None:
     # Split data to train and test (0.80:0.20)
     X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.2)
 
+    tab1,tab2,tab3,tab4 = st.tabs(['Linear Regression','Random Forest Regressor','Knn Regressor','Gradient Boosting Regressor'])
     # Linear Regression model
-    st.header('*Linear Regression*:')
-    st.write()
-    reg = LinearRegression()
-    reg.fit(X_train, y_train)
-    y_pred = reg.predict(X_test)
-    st.subheader('Metrics',divider='blue')
-    st.write('*Accuracy*:',reg.score(X_train, y_train)*100)
+    with tab1:
+        st.header('*Linear Regression*:')
+        st.write()
+        reg = LinearRegression()
+        reg.fit(X_train, y_train)
+        y_pred = reg.predict(X_test)
+        st.subheader('Metrics',divider='blue')
+        st.write('*Accuracy*:',reg.score(X_train, y_train)*100)
 
 
-    st.write('*Mean Absolute Error*:', metrics.mean_absolute_error(y_test, y_pred))
-    st.write('*Mean Squared Error*:', metrics.mean_squared_error(y_test, y_pred))
-    st.write('*Root Mean Squared Error*:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+        st.write('*Mean Absolute Error*:', metrics.mean_absolute_error(y_test, y_pred))
+        st.write('*Mean Squared Error*:', metrics.mean_squared_error(y_test, y_pred))
+        st.write('*Root Mean Squared Error*:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
 
-    fig = plt.figure(figsize=(10,5))
-    plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
-    # Create a scatter plot for y_pred
-    plt.scatter(y_test, y_pred, c='r', label='Predicted Values', marker='x')
+        fig = plt.figure(figsize=(10,5))
+        plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
+        # Create a scatter plot for y_pred
+        plt.scatter(y_test, y_pred, c='r', label='Predicted Values', marker='x')
 
-    
-    plt.xlabel('Actual Values')
-    plt.ylabel('Predicted Values')
-    plt.legend()
-    st.pyplot(fig)
+        
+        plt.xlabel('Actual Values')
+        plt.ylabel('Predicted Values')
+        plt.legend()
+        st.pyplot(fig)
 
 
 
 
     # Random Forest Regressor
-    st.header('*Random Forest Regressor*:')
-    st.write()
-    rfr = RandomForestRegressor(n_estimators = 400,max_depth=15,n_jobs=5)        
-    rfr.fit(X_train,y_train)
-    y_pred=rfr.predict(X_test)
-    st.subheader('Metrics',divider='blue')
-    st.write('*Accuracy*:',rfr.score(X_test, y_test)*100)
+    with tab2:
+        st.header('*Random Forest Regressor*:')
+        st.write()
+        rfr = RandomForestRegressor(n_estimators = 400,max_depth=15,n_jobs=5)        
+        rfr.fit(X_train,y_train)
+        y_pred=rfr.predict(X_test)
+        st.subheader('Metrics',divider='blue')
+        st.write('*Accuracy*:',rfr.score(X_test, y_test)*100)
 
-    st.write('*Mean Absolute Error*:', metrics.mean_absolute_error(y_test, y_pred))
-    st.write('*Mean Squared Error*:', metrics.mean_squared_error(y_test, y_pred))
-    st.write('*Root Mean Squared Error*:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+        st.write('*Mean Absolute Error*:', metrics.mean_absolute_error(y_test, y_pred))
+        st.write('*Mean Squared Error*:', metrics.mean_squared_error(y_test, y_pred))
+        st.write('*Root Mean Squared Error*:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
 
-    fig = plt.figure(figsize=(10,5))
-    plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
-    # Create a scatter plot for y_pred
-    plt.scatter(y_test, y_pred, c='r', label='Predicted Values', marker='x')
+        fig = plt.figure(figsize=(10,5))
+        plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
+        # Create a scatter plot for y_pred
+        plt.scatter(y_test, y_pred, c='r', label='Predicted Values', marker='x')
 
-    
-    plt.xlabel('Actual Values')
-    plt.ylabel('Predicted Values')
-    plt.legend()
-    st.pyplot(fig)
+        
+        plt.xlabel('Actual Values')
+        plt.ylabel('Predicted Values')
+        plt.legend()
+        st.pyplot(fig)
 
 
 
 
     #Knn Regressor
-    st.header('*Knn Regressor*:')
-    st.write()
-    from sklearn.neighbors import KNeighborsRegressor
-    knn = KNeighborsRegressor(n_neighbors=5)
-    knn.fit(X_train,y_train)
-    y_pred=knn.predict(X_test)
-    st.subheader('Metrics',divider='blue')
-    st.write('*Accuracy*: {:2f}'.format(knn.score(X_test, y_test)*100))
+    with tab3:
+        st.header('*Knn Regressor*:')
+        st.write()
+        from sklearn.neighbors import KNeighborsRegressor
+        knn = KNeighborsRegressor(n_neighbors=5)
+        knn.fit(X_train,y_train)
+        y_pred=knn.predict(X_test)
+        st.subheader('Metrics',divider='blue')
+        st.write('*Accuracy*: {:2f}'.format(knn.score(X_test, y_test)*100))
 
-    st.write('*Mean Absolute Error*: {:2f}'.format( metrics.mean_absolute_error(y_test, y_pred)))
-    st.write('*Mean Squared Error*: {:2f}'.format( metrics.mean_squared_error(y_test, y_pred)))
-    st.write('*Root Mean Squared Error*: {:2f}'.format( np.sqrt(metrics.mean_squared_error(y_test, y_pred))))
-    fig = plt.figure(figsize=(10,5))
-    plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
-    # Create a scatter plot for y_pred
-    plt.scatter(y_test, y_pred, c='r', label='Predicted Values', marker='x')
+        st.write('*Mean Absolute Error*: {:2f}'.format( metrics.mean_absolute_error(y_test, y_pred)))
+        st.write('*Mean Squared Error*: {:2f}'.format( metrics.mean_squared_error(y_test, y_pred)))
+        st.write('*Root Mean Squared Error*: {:2f}'.format( np.sqrt(metrics.mean_squared_error(y_test, y_pred))))
+        fig = plt.figure(figsize=(10,5))
+        plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
+        # Create a scatter plot for y_pred
+        plt.scatter(y_test, y_pred, c='r', label='Predicted Values', marker='x')
 
-    
-    plt.xlabel('Actual Values')
-    plt.ylabel('Predicted Values')
-    plt.legend()
-    st.pyplot(fig)
+        
+        plt.xlabel('Actual Values')
+        plt.ylabel('Predicted Values')
+        plt.legend()
+        st.pyplot(fig)
 
 
 
 
     #Gradient Boosting Regressor
-    st.header('*Gradient Boosting Regressor*')
-    st.write()
-    from sklearn.ensemble import GradientBoostingRegressor
-    gbr = GradientBoostingRegressor()
-    gbr.fit(X_train,y_train)
-    y_pred=gbr.predict(X_test)
-    st.subheader('Metrics',divider='blue')
-    # st.write('*Accuracy*:',gbr.score(X_test, y_test)*100)
-    st.write('*Accuracy*: {:.2f}'.format(gbr.score(X_test, y_test)*100))
+    with tab4:
+        st.header('*Gradient Boosting Regressor*')
+        st.write()
+        from sklearn.ensemble import GradientBoostingRegressor
+        gbr = GradientBoostingRegressor()
+        gbr.fit(X_train,y_train)
+        y_pred=gbr.predict(X_test)
+        st.subheader('Metrics',divider='blue')
+        # st.write('*Accuracy*:',gbr.score(X_test, y_test)*100)
+        st.write('*Accuracy*: {:.2f}'.format(gbr.score(X_test, y_test)*100))
 
-    st.write('*Mean Absolute Error*: {:2f}'.format( metrics.mean_absolute_error(y_test, y_pred)))
-    st.write('*Mean Squared Error*: {:2f}'.format( metrics.mean_squared_error(y_test, y_pred)))
-    st.write('*Root Mean Squared Error*: {:2f}'.format( np.sqrt(metrics.mean_squared_error(y_test, y_pred))))
+        st.write('*Mean Absolute Error*: {:2f}'.format( metrics.mean_absolute_error(y_test, y_pred)))
+        st.write('*Mean Squared Error*: {:2f}'.format( metrics.mean_squared_error(y_test, y_pred)))
+        st.write('*Root Mean Squared Error*: {:2f}'.format( np.sqrt(metrics.mean_squared_error(y_test, y_pred))))
 
-    fig = plt.figure(figsize=(10,5))
-    #I need different Colors for ytest and ypred
-    # plt.scatter(x=y_test,y=y_pred,color=['red','blue'])
-    plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
-    # Create a scatter plot for y_pred
-    plt.scatter(y_test, y_pred, c='r', label='Predicted Values', marker='x')
+        fig = plt.figure(figsize=(10,5))
+        #I need different Colors for ytest and ypred
+        # plt.scatter(x=y_test,y=y_pred,color=['red','blue'])
+        plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
+        # Create a scatter plot for y_pred
+        plt.scatter(y_test, y_pred, c='r', label='Predicted Values', marker='x')
 
-    
-    plt.xlabel('Actual Values')
-    plt.ylabel('Predicted Values')
-    plt.legend()
-    st.pyplot(fig)
+        
+        plt.xlabel('Actual Values')
+        plt.ylabel('Predicted Values')
+        plt.legend()
+        st.pyplot(fig)
