@@ -14,8 +14,8 @@ st.title("*RETAIL STOCK STORE INVENTORY ANALYSIS*")
 uploaded_file = st.file_uploader("*Upload the dataset for analysis*")
 if uploaded_file is not None:
     data = pd.read_csv(uploaded_file)
-    st.write('Heres the uploaded *dataset*')
-    st.write(data)
+    st.subheader('Heres the uploaded *dataset*')
+    st.table(data.head(20))
     # Convert date to datetime format and show dataset information
     data['Date'] =  pd.to_datetime(data['Date'])
     data.info()
@@ -26,9 +26,10 @@ if uploaded_file is not None:
     data['Day'] = pd.DatetimeIndex(data['Date']).day
     data['Year'] = pd.DatetimeIndex(data['Date']).year
 
-    st.sidebar.title('*App Navigation*')
+    # st.sidebar.title('*App Navigation*')
 
-    section = st.sidebar.radio('Go to:', ('Section 1', 'Section 2', 'Section 3'))
+    # section = st.sidebar.radio('Go to:', ('Section 1', 'Section 2', 'Section 3'))
+
     plt.figure(figsize=(50,50))
     st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -58,7 +59,7 @@ if uploaded_file is not None:
                 arrowprops=dict(arrowstyle="->", connectionstyle="arc3"),
                 horizontalalignment='center', verticalalignment='center')
 
-
+    st.subheader('Total sales for each store')
     # plot properties
     plt.xticks(rotation=0)
     plt.ticklabel_format(useOffset=False, style='plain', axis='y')
@@ -279,12 +280,12 @@ if uploaded_file is not None:
         reg.fit(X_train, y_train)
         y_pred = reg.predict(X_test)
         st.subheader('Metrics',divider='blue')
-        st.write('*Accuracy*:',reg.score(X_train, y_train)*100)
+        st.write(f'*Accuracy* : <code><span style="color:lightgreen">{reg.score(X_train, y_train)*100:.2f}</span></code>',unsafe_allow_html=True)
 
 
-        st.write('*Mean Absolute Error*:', metrics.mean_absolute_error(y_test, y_pred))
-        st.write('*Mean Squared Error*:', metrics.mean_squared_error(y_test, y_pred))
-        st.write('*Root Mean Squared Error*:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+        st.write(f'*Mean Absolute Error* : <code><span style="color:lightgreen">{metrics.mean_absolute_error(y_test, y_pred):.2f}</span></code>',unsafe_allow_html=True)
+        st.write(f'*Mean Squared Error* : <code><span style="color:lightgreen">{metrics.mean_squared_error(y_test, y_pred):.2f}</span></code>',unsafe_allow_html=True )
+        st.write(f'*Root Mean Squared Error* : <code><span style="color:lightgreen">{np.sqrt(metrics.mean_squared_error(y_test, y_pred)):.2f}</span></code>',unsafe_allow_html=True )
 
 
         fig = plt.figure(figsize=(10,5))
@@ -309,11 +310,11 @@ if uploaded_file is not None:
         rfr.fit(X_train,y_train)
         y_pred=rfr.predict(X_test)
         st.subheader('Metrics',divider='blue')
-        st.write('*Accuracy*:',rfr.score(X_test, y_test)*100)
+        st.write(f'Accuracy : <code><span style="color:lightgreen">{rfr.score(X_test, y_test)*100:.2f}</span></code>',unsafe_allow_html=True)
 
-        st.write('*Mean Absolute Error*:', metrics.mean_absolute_error(y_test, y_pred))
-        st.write('*Mean Squared Error*:', metrics.mean_squared_error(y_test, y_pred))
-        st.write('*Root Mean Squared Error*:', np.sqrt(metrics.mean_squared_error(y_test, y_pred)))
+        st.write(f'*Mean Absolute Error* : <code><span style="color:lightgreen">{metrics.mean_absolute_error(y_test, y_pred):.2f}</span></code>',unsafe_allow_html=True)
+        st.write(f'*Mean Squared Error*: <code><span style="color:lightgreen">{metrics.mean_squared_error(y_test, y_pred):.2f}</span></code>',unsafe_allow_html=True)
+        st.write(f'*Root Mean Squared Error*: <code><span style="color:lightgreen">{np.sqrt(metrics.mean_squared_error(y_test, y_pred)):.2f}</span></code>',unsafe_allow_html=True)
 
         fig = plt.figure(figsize=(10,5))
         plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
@@ -338,11 +339,11 @@ if uploaded_file is not None:
         knn.fit(X_train,y_train)
         y_pred=knn.predict(X_test)
         st.subheader('Metrics',divider='blue')
-        st.write('*Accuracy*: {:2f}'.format(knn.score(X_test, y_test)*100))
+        st.write(f'*Accuracy* : <code><span style="color:lightgreen">{knn.score(X_test, y_test)*100:.2f}</span></code>',unsafe_allow_html=True)
 
-        st.write('*Mean Absolute Error*: {:2f}'.format( metrics.mean_absolute_error(y_test, y_pred)))
-        st.write('*Mean Squared Error*: {:2f}'.format( metrics.mean_squared_error(y_test, y_pred)))
-        st.write('*Root Mean Squared Error*: {:2f}'.format( np.sqrt(metrics.mean_squared_error(y_test, y_pred))))
+        st.write(f'*Mean Absolute Error* : <code><span style="color:lightgreen">{metrics.mean_absolute_error(y_test, y_pred):.2f}</span></code>',unsafe_allow_html=True)
+        st.write(f'*Mean Squared Error*: <code><span style="color:lightgreen">{metrics.mean_squared_error(y_test, y_pred):.2f}</span></code>',unsafe_allow_html=True)
+        st.write(f'*Root Mean Squared Error*: <code><span style="color:lightgreen">{np.sqrt(metrics.mean_squared_error(y_test, y_pred)):.2f}</span></code>',unsafe_allow_html=True)
         fig = plt.figure(figsize=(10,5))
         plt.scatter(y_test, y_test, c='b', label='Actual Values', marker='o', edgecolors='k')
         # Create a scatter plot for y_pred
@@ -366,12 +367,12 @@ if uploaded_file is not None:
         gbr.fit(X_train,y_train)
         y_pred=gbr.predict(X_test)
         st.subheader('Metrics',divider='blue')
-        # st.write('*Accuracy*:',gbr.score(X_test, y_test)*100)
-        st.write('*Accuracy*: {:.2f}'.format(gbr.score(X_test, y_test)*100))
+        st.write(f'*Accuracy* : <code><span style="color:lightgreen">{gbr.score(X_test, y_test)*100:.2f}</span></code>',unsafe_allow_html=True)
 
-        st.write('*Mean Absolute Error*: {:2f}'.format( metrics.mean_absolute_error(y_test, y_pred)))
-        st.write('*Mean Squared Error*: {:2f}'.format( metrics.mean_squared_error(y_test, y_pred)))
-        st.write('*Root Mean Squared Error*: {:2f}'.format( np.sqrt(metrics.mean_squared_error(y_test, y_pred))))
+
+        st.write(f'*Mean Absolute Error* : <code><span style="color:lightgreen">{metrics.mean_absolute_error(y_test, y_pred):.2f}</span></code>',unsafe_allow_html=True)
+        st.write(f'*Mean Squared Error*: <code><span style="color:lightgreen">{metrics.mean_squared_error(y_test, y_pred):.2f}</span></code>',unsafe_allow_html=True)
+        st.write(f'*Root Mean Squared Error*: <code><span style="color:lightgreen">{np.sqrt(metrics.mean_squared_error(y_test, y_pred)):.2f}</span></code>',unsafe_allow_html=True)
 
         fig = plt.figure(figsize=(10,5))
         #I need different Colors for ytest and ypred
