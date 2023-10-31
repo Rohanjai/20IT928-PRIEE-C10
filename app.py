@@ -137,7 +137,7 @@ if uploaded_file is not None:
     st.header('*Sales in holidays*')
     tab1 ,tab2 , tab3,tab4 = st.tabs(['Super Bowl','Thanksgiving','Labour Day','Christmas'])
     with tab1:
-        st.line_chart(total_sales,Super_Bowl,'Super Bowl')
+        plot_line(total_sales,Super_Bowl,'Super Bowl')
     with tab2:
         plot_line(total_sales,Labour_Day,'Labour Day')
     with tab3:
