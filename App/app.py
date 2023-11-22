@@ -16,7 +16,7 @@ def Analyze_Page():
         data = pd.read_csv(uploaded_file)
         st.subheader('Heres the uploaded *dataset*')
         st.table(data.head(20))
-        # st.write(data)
+       
         # Convert date to datetime format and show dataset information
         data['Date'] =  pd.to_datetime(data['Date'])
         data.info()
@@ -26,11 +26,6 @@ def Analyze_Page():
         data['Month']= pd.DatetimeIndex(data['Date']).month
         data['Day'] = pd.DatetimeIndex(data['Date']).day
         data['Year'] = pd.DatetimeIndex(data['Date']).year
-
-        # st.sidebar.title('*App Navigation*')
-
-        # section = st.sidebar.radio('Go to:', ('Section 1', 'Section 2', 'Section 3'))
-
         plt.figure(figsize=(50,50))
         st.set_option('deprecation.showPyplotGlobalUse', False)
 
@@ -46,7 +41,6 @@ def Analyze_Page():
 
         # store have minimum sales
         p = ax.patches[0]
-        # print(type(p.get_height()))
         ax.annotate("The store has minimum sales is 33 with {0:.2f} $".format((p.get_height())), xy=(p.get_x(), p.get_height()), xycoords='data',
                     xytext=(0.17, 0.32), textcoords='axes fraction',
                     arrowprops=dict(arrowstyle="->", connectionstyle="arc3"),
@@ -91,9 +85,6 @@ def Analyze_Page():
         # Sales for second quarterly in 2012
         Q2 = data[(data['Date'] > '2012-04-01') & (data['Date'] < '2012-06-30')].groupby('Store')['Weekly_Sales'].sum()
 
-        # Plotting the difference between sales for second and third quarterly
-        # Q2.plot(ax=Q3.plot('bar',legend=True),kind='bar',color='r',alpha=0.2,legend=True);
-        # plt.legend(["Q3' 2012", "Q2' 2012"]);
         st.subheader('The difference between sales for second and third quarterly')
         fig, ax = plt.subplots()
 
@@ -215,10 +206,6 @@ def Analyze_Page():
         # Monthly view of sales for all years
         st.header('*Monthly view of sales for all years*')
         plt.figure(figsize=(10,6))
-        # st.bar_chart(data["Month"],data["Weekly_Sales"],x="Month",y="Weekly_Sales")
-        # plt.xlabel("months")
-        # plt.ylabel("Weekly Sales")
-        # plt.title("Monthly view of sales")
         monthly_data = data.groupby("Month")[["Weekly_Sales"]].sum()
         st.bar_chart(monthly_data)  
 
@@ -228,23 +215,10 @@ def Analyze_Page():
         st.header('*Yearly view of sales*')
         plt.figure(figsize=(10,6))
         newd = data.groupby("Year")[["Weekly_Sales"]].sum()
-        # plt.xlabel("Years")
-        # plt.ylabel("Weekly Sales")
-        # plt.title("Yearly view of sales")
         st.bar_chart(newd)
-
-
-
-        # find outliers could be another sidebar
-        
-
-
 
         # drop the outliers     
         data_new = data[(data['Unemployment']<10) & (data['Unemployment']>4.5) & (data['Temperature']>10)]
-        # data_new
-
-
 
         # Import sklearn 
         from sklearn.ensemble import RandomForestRegressor
@@ -286,8 +260,6 @@ def Analyze_Page():
             plt.ylabel('Predicted Values')
             plt.legend()
             st.pyplot(fig)
-
-
 
 
         # Random Forest Regressor
