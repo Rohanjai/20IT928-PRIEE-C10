@@ -1,41 +1,52 @@
-#  **20IT928-PRIEE-C10**
+# Retail Stock Store Inventory Analysis
 
-Project Title: Retail Store Stock Inventory Analysis<br>
-<br>
-Project Domain: Data Science<br>
-<br>
-Project Description: This project mainly deals with determining the right amount of stock to fulfill the demands of the customer. It also determines the profit on buying that stock. It also evaluates business performance.<br>
+## Overview
 
-Team Members:-
+This repository contains the code and documentation for the "Retail Stock Store Inventory Analysis" project. The project involves the analysis of the Walmart dataset to predict weekly sales using a combination of machine learning and deep learning techniques. A Streamlit application has been developed to facilitate user interaction and sales forecasting.
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Register Number</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Rohan Jai D</td>
-      <td>111720102126</td>
-    </tr>
-    <tr>
-      <td>Rakesh S D</td>
-      <td>111720102122</td>
-    </tr>
-    <tr>
-      <td>Sandheep Krishna A</td>
-      <td>111720102137</td>
-    </tr>
-    <tr>
-      <td>Sanjay C</td>
-      <td>111720102138</td>
-    </tr>
-    <tr>
-      <td>Pavan Koushik S</td>
-      <td>111720102312</td>
-    </tr>
-    <!-- Add more rows as needed -->
-  </tbody>
-</table>
+## Team Members
+
+- **Rohan Jai D (Team Leader)**
+  - Register Number: 111720102126
+
+- **Rakesh S D**
+  - Register Number: 111720102122
+
+- **Sandheep Krishna A**
+  - Register Number: 111720102137
+
+- **Sanjay C**
+  - Register Number: 111720102138
+
+- **Pavan Koushik S**
+  - Register Number: 111720102312
+
+## Project Structure
+
+- **`Notebooks/`**: Contains Jupyter Notebook files for data analysis and machine learning model implementation.
+- **`app/`**: Holds the Streamlit application code for user interfaces and sales forecasting.
+- **`models/`**: Contains the implementation of the deep learning and machine learning model.
+- **`data/`**: The dataset obtained from Kaggle (Walmart dataset) is stored in this directory.
+- **`docs/`**: Documentation files, including the project report and any additional resources.
+
+## How to Use
+
+1. **Clone the Repository:**
+    ```bash
+    git clone https://github.com/DataFusionX/20IT928-PRIEE-C10.git
+    cd 20IT928-PRIEE-C10
+    ```
+
+2. **Install Dependencies:**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+3. **Run the Streamlit Application:**
+    ```bash
+    streamlit run streamlit_app/app.py
+    ```
+
+4. **Explore the Jupyter Notebooks:**
+    - Navigate to the `code/` directory to explore Jupyter Notebooks for data analysis and machine learning model implementation.
+
