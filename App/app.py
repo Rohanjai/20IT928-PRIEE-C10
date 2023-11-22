@@ -7,10 +7,10 @@ from matplotlib import dates
 from datetime import datetime
 import plotly.figure_factory as ff
 import streamlit as st 
-
+import pickle
 def Analyze_Page():
 
-    st.header('Upload Dataset')
+    st.subheader('Upload Dataset to Analyze')
     uploaded_file = st.file_uploader("Choose a file", type="csv")
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file)
@@ -240,6 +240,7 @@ def Analyze_Page():
             st.write()
             reg = LinearRegression()
             reg.fit(X_train, y_train)
+            # pickle.dump(reg, open('model_reg.pkl','wb'))
             y_pred = reg.predict(X_test)
             st.subheader('Metrics',divider='blue')
             st.write(f'*Accuracy* : <code><span style="color:lightgreen">{reg.score(X_train, y_train)*100:.2f}</span></code>',unsafe_allow_html=True)
@@ -268,6 +269,7 @@ def Analyze_Page():
             st.write()
             rfr = RandomForestRegressor(n_estimators = 400,max_depth=15,n_jobs=5)        
             rfr.fit(X_train,y_train)
+            # pickle.dump(rfr, open('model_rfr.pkl','wb'))
             y_pred=rfr.predict(X_test)
             st.subheader('Metrics',divider='blue')
             st.write(f'Accuracy : <code><span style="color:lightgreen">{rfr.score(X_test, y_test)*100:.2f}</span></code>',unsafe_allow_html=True)
@@ -297,6 +299,7 @@ def Analyze_Page():
             from sklearn.neighbors import KNeighborsRegressor
             knn = KNeighborsRegressor(n_neighbors=5)
             knn.fit(X_train,y_train)
+            # pickle.dump(knn, open('model_knn.pkl','wb'))
             y_pred=knn.predict(X_test)
             st.subheader('Metrics',divider='blue')
             st.write(f'*Accuracy* : <code><span style="color:lightgreen">{knn.score(X_test, y_test)*100:.2f}</span></code>',unsafe_allow_html=True)
@@ -325,6 +328,7 @@ def Analyze_Page():
             from sklearn.ensemble import GradientBoostingRegressor
             gbr = GradientBoostingRegressor()
             gbr.fit(X_train,y_train)
+            # pickle.dump(gbr, open('model_gbr.pkl','wb'))
             y_pred=gbr.predict(X_test)
             st.subheader('Metrics',divider='blue')
             st.write(f'*Accuracy* : <code><span style="color:lightgreen">{gbr.score(X_test, y_test)*100:.2f}</span></code>',unsafe_allow_html=True)

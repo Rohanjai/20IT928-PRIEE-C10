@@ -14,7 +14,7 @@ def prediction_lstm(X_test):
     lstm_test_pred = model.predict(X_test)
     lstm_prediction = pd.DataFrame(test['ID'], columns=['ID'])
     lstm_prediction['item_cnt_month'] = lstm_test_pred.clip(0., 20.)
-    # lstm_prediction.to_csv('lstm_submission.csv', index=False)
+    # lstm_prediction.to_csv('lstm_predictions.csv', index=False)
     st.table(lstm_prediction.head(10))
 
 
@@ -24,7 +24,7 @@ def prediction_mlp(X_test):
     mlp_test_pred = model.predict(X_test)
     mlp_prediction = pd.DataFrame(test['ID'], columns=['ID'])
     mlp_prediction['item_cnt_month'] = mlp_test_pred.clip(0., 20.)
-    mlp_prediction.to_csv('mlp_submission.csv', index=False)
+    # mlp_prediction.to_csv('mlp_predictions.csv', index=False)
     st.table(mlp_prediction.head(10))
 
 
@@ -34,7 +34,7 @@ def preprocessing(X_test):
     return X_test_reshaped
 
 def forecasting_page():
-    st.header('Upload Dataset to check for Forecasting')
+    st.subheader('Upload Dataset to check for Forecasting')
     uploaded_file = st.file_uploader("Choose a file", type="csv")
     if uploaded_file is not None:
         data = pd.read_csv(uploaded_file)
@@ -52,20 +52,18 @@ def forecasting_page():
 
     elif option == 'LSTM':
         st.write('You selected', option)
-        st.subheader('Preprocessing the data')
-        test_data = preprocessing(data)
-        st.subheader('Loading the model')
-        st.subheader('Predictions')
-        st.info("Calculating model predictions in the background... Please wait.")
-        prediction_lstm(test_data)
-        st.empty()
+        if st.button('Start Forecasting',key='1'):
+            
+            test_data = preprocessing(data)
+            with st.spinner("Calculating model predictions in the background... Please wait."):
+                prediction_lstm(test_data)
+            
     elif option == 'MLP':
         st.write('You selected', option)
-        st.subheader('Preprocessing the data')
-        test_data = preprocessing(data)
-        st.subheader('Loading the model')
-        st.info("Calculating model predictions in the background... Please wait.")
-        st.subheader('Predictions')
-        prediction_mlp(test_data)
-        st.empty()
+        if st.button('Start Forecasting',key='2'):
+            test_data = preprocessing(data)
+            # st.info("Calculating model predictions in the background... Please wait.")
+            with st.spinner("Calculating model predictions in the background... Please wait."):
+                prediction_mlp(test_data)
+            
     
