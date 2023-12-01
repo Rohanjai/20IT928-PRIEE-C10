@@ -51,7 +51,7 @@ This repository contains the code and documentation for the "Retail Stock Store 
 3. **Run the Streamlit Application:**
 
    ```bash
-   streamlit run streamlit_app/app.py
+   streamlit run main.py
    ```
 
 4. **Explore the Jupyter Notebooks:**
