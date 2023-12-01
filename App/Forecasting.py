@@ -42,7 +42,7 @@ def forecasting_page():
         st.table(data.head(5))
     #Drop down menu for forecasting
     st.subheader('Select the model for forecasting')
-    option = st.selectbox('Select the model',('None','MLP','LSTM'))
+    option = st.selectbox('Select the model',('None','MLP-LSTM-Autoencoder','LSTM'))
 
     if option == 'None':
         #write select a model in center
@@ -51,15 +51,15 @@ def forecasting_page():
 
 
     elif option == 'LSTM':
-        st.write('You selected', option)
+        st.write('You selected', option,'Model')
         if st.button('Start Forecasting',key='1'):
             
             test_data = preprocessing(data)
             with st.spinner("Calculating model predictions in the background... Please wait."):
                 prediction_lstm(test_data)
             
-    elif option == 'MLP':
-        st.write('You selected', option)
+    elif option == 'MLP-LSTM-Autoencoder':
+        st.write('You selected', option,'Model')
         if st.button('Start Forecasting',key='2'):
             test_data = preprocessing(data)
             # st.info("Calculating model predictions in the background... Please wait.")

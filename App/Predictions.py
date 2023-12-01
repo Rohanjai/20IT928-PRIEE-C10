@@ -19,8 +19,6 @@ def Predictions_Page():
     month = st.slider("Month", 1, 12, current_date.month)
     year = st.slider("Year", 2000, current_date.year, current_date.year)
     features = np.array([store_number,fuel_price,cpi,unemployment,day,month,year])
-    # for i in ['Store No','Fuel_Price','CPI','Unemployment','Day','Month','Year']:
-        # st.markdown(i)
     st.divider()
     st.subheader('Available Models') 
     tab1,tab2,tab3,tab4 = st.tabs(['Linear Regression','Random Forest Regressor','Knn Regressor','Gradient Boosting Regressor'])
