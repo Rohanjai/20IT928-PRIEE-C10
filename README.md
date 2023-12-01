@@ -7,15 +7,19 @@ This repository contains the code and documentation for the "Retail Stock Store 
 ## Team Members
 
 - **Rohan Jai D (Team Leader)**
+
   - Register Number: 111720102126
 
 - **Rakesh S D**
+
   - Register Number: 111720102122
 
 - **Sandheep Krishna A**
+
   - Register Number: 111720102137
 
 - **Sanjay C**
+
   - Register Number: 111720102138
 
 - **Pavan Koushik S**
@@ -32,21 +36,23 @@ This repository contains the code and documentation for the "Retail Stock Store 
 ## How to Use
 
 1. **Clone the Repository:**
-    ```bash
-    git clone https://github.com/DataFusionX/20IT928-PRIEE-C10.git
-    cd 20IT928-PRIEE-C10
-    ```
+
+   ```bash
+   git clone https://github.com/DataFusionX/20IT928-PRIEE-C10.git
+   cd 20IT928-PRIEE-C10/App
+   ```
 
 2. **Install Dependencies:**
-    ```bash
-    pip install -r requirements.txt
-    ```
+
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 3. **Run the Streamlit Application:**
-    ```bash
-    streamlit run streamlit_app/app.py
-    ```
+
+   ```bash
+   streamlit run streamlit_app/app.py
+   ```
 
 4. **Explore the Jupyter Notebooks:**
-    - Navigate to the `code/` directory to explore Jupyter Notebooks for data analysis and machine learning model implementation.
-
+   - Navigate to the `code/` directory to explore Jupyter Notebooks for data analysis and machine learning model implementation.
