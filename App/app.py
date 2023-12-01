@@ -133,9 +133,9 @@ def Analyze_Page():
         with tab1:
             plot_line(total_sales,Super_Bowl,'Super Bowl')
         with tab2:
-            plot_line(total_sales,Labour_Day,'Labour Day')
-        with tab3:
             plot_line(total_sales,Thanksgiving,'Thanksgiving')
+        with tab3:
+            plot_line(total_sales,Labour_Day,'Labour Day')
         with tab4:
             plot_line(total_sales,Christmas,'Christmas')
         
