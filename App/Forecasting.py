@@ -14,6 +14,7 @@ def prediction_lstm(X_test):
     lstm_test_pred = model.predict(X_test)
     lstm_prediction = pd.DataFrame(test['ID'], columns=['ID'])
     lstm_prediction['item_cnt_month'] = lstm_test_pred.clip(0., 20.)
+    mlp_prediction['item_cnt_month'] = mlp_prediction['item_cnt_month'].apply(lambda x: round(x*100))
     # lstm_prediction.to_csv('lstm_predictions.csv', index=False)
     st.table(lstm_prediction.head(10))
 
@@ -24,6 +25,7 @@ def prediction_mlp(X_test):
     mlp_test_pred = model.predict(X_test)
     mlp_prediction = pd.DataFrame(test['ID'], columns=['ID'])
     mlp_prediction['item_cnt_month'] = mlp_test_pred.clip(0., 20.)
+    mlp_prediction['item_cnt_month'] = mlp_prediction['item_cnt_month'].apply(lambda x: round(x*100))
     # mlp_prediction.to_csv('mlp_predictions.csv', index=False)
     st.table(mlp_prediction.head(10))
 
