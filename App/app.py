@@ -37,8 +37,8 @@ def Analyze_Page():
         # Assigning a specific color for the stores have the lowest and highest sales
         clrs = ['lightsteelblue' if ((x < max(total_sales_for_each_store_array)) and (x > min(total_sales_for_each_store_array))) else 'midnightblue' for x in total_sales_for_each_store_array]
 
-
-        ax = total_sales_for_each_store.plot(kind='bar',color=clrs)
+        fig , ax = plt.subplots(figsize=(15,7))
+        total_sales_for_each_store.plot(kind='bar',color=clrs,ax=ax)
 
         # store have minimum sales
         p = ax.patches[0]
@@ -78,7 +78,7 @@ def Analyze_Page():
 
 
 
-        plt.figure(figsize=(15,7))
+        plt.figure(figsize=(20,7))
 
         # Sales for third quarterly in 2012
         Q3 = data[(data['Date'] > '2012-07-01') & (data['Date'] < '2012-09-30')].groupby('Store')['Weekly_Sales'].sum()
@@ -90,13 +90,16 @@ def Analyze_Page():
         fig, ax = plt.subplots()
 
         # Plot the sales for the second quarterly
-        Q2.plot(kind='bar', color='b', alpha=0.2, ax=ax)
+        Q2.plot(kind='bar', color='b', alpha=0.2, ax=ax,width=0.4)
 
         # Plot the sales for the third quarterly on the same axis
-        Q3.plot(kind='bar', color='r', alpha=0.2, ax=ax)
+        Q3.plot(kind='bar', color='r', alpha=0.2, ax=ax,width=0.4)
 
         # Add a legend
         plt.legend(["Q2' 2012", "Q3' 2012"])
+
+        plt.xticks(rotation=0,fontsize=5)
+        plt.yticks(fontsize=5)
 
         st.pyplot()
 
